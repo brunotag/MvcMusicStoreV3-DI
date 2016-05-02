@@ -26,6 +26,8 @@ namespace MvcMusicStore.UnitTest
         private IDbSet<Cart> _carts;
         private Cart _addedCart;
 
+        private const int _initialCartItemCount = 42;
+
         [TestInitialize]
         public void Setup()
         {
@@ -34,12 +36,36 @@ namespace MvcMusicStore.UnitTest
                 AlbumId = _albumId
             };
 
-            _addedCart = new Cart();
+            _addedCart = new Cart()
+            {
+                Count = _initialCartItemCount,
+                AlbumId = _albumId,
+                CartId = _shoppingCartId
+            };
 
-            _carts = new InMemoryDbSet<Cart>();
+            _carts = new InMemoryDbSet<Cart>(true);
 
             _mockStore = new Mock<IMusicStoreEntities>();
             _mockStore.Setup(store => store.Carts).Returns(_carts);
+        }
+
+        [TestMethod]
+        public void When_CartItemIsFound_Then_StoreShouldContainTheSameCartItem()
+        {
+            Setup_CartsWillContainCurrentCart();
+
+            CallSut();
+
+            _mockStore.VerifyGet(store => store.Carts, Times.Once());
+            _mockStore.Verify(store => store.SaveChanges(), Times.Once());
+
+            Assert.AreEqual(1, Store.Carts.Count(), string.Format("Store contains {0} objects instead of 1", Store.Carts.Count()));
+            Assert.AreEqual(_addedCart, Store.Carts.Single());
+
+            var actualCart = Store.Carts.Single();
+            Assert.AreEqual(_albumId, actualCart.AlbumId);
+            Assert.AreEqual(_shoppingCartId, actualCart.CartId);
+            Assert.AreEqual(_initialCartItemCount + 1, actualCart.Count);
         }
 
         [TestMethod]
