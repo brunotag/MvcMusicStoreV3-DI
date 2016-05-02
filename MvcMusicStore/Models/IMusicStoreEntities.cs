@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MvcMusicStore.Models
 {
-    interface IMusicStoreEntities : IDisposable
+    public interface IMusicStoreEntities : IDisposable
     {
         IDbSet<Album> Albums { get; set; }
         IDbSet<Genre> Genres { get; set; }
