@@ -8,7 +8,7 @@ namespace MvcMusicStore.Models
 {
     public partial class ShoppingCart
     {
-        IMusicStoreEntities storeDB = new MusicStoreEntities();
+        IMusicStoreEntities storeDB;
 
         string ShoppingCartId { get; set; }
 
@@ -116,7 +116,7 @@ cart => cart.CartId == ShoppingCartId
 
         public decimal GetTotal()
         {
-            // Multiply album price by count of that album to get 
+            // Multiply album price by count of that album to get
             // the current price for each of those albums in the cart
             // sum all album price totals to get the cart total
             decimal? total = (from cartItems in storeDB.Carts
