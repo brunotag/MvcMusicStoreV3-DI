@@ -12,6 +12,11 @@ namespace MvcMusicStore.Controllers
     {
         IMusicStoreEntities storeDB;
 
+        public StoreController(IMusicStoreEntities storeDb)
+        {
+            this.storeDB = storeDb;
+        }
+
         //
         // GET: /Store/
 

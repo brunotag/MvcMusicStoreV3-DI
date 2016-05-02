@@ -12,6 +12,11 @@ namespace MvcMusicStore.Controllers
 
         IMusicStoreEntities storeDB;
 
+        public HomeController(IMusicStoreEntities storeDb)
+        {
+            this.storeDB = storeDb;
+        }
+
         public ActionResult Index()
         {
             // Get most popular albums
