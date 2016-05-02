@@ -88,6 +88,7 @@
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\IMusicStoreEntities.cs" />
     <Compile Include="Models\MusicStoreEntities.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
