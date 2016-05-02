@@ -11,6 +11,12 @@ namespace MvcMusicStore.Controllers
         IMusicStoreEntities storeDB;
         const string PromoCode = "FREE";
 
+        public CheckoutController()
+            : this(new MusicStoreEntities())
+        {
+
+        }
+
         public CheckoutController(IMusicStoreEntities storeDb)
         {
             this.storeDB = storeDb;

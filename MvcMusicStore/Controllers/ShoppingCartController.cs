@@ -9,6 +9,12 @@ namespace MvcMusicStore.Controllers
     {
         IMusicStoreEntities storeDB;
 
+        public ShoppingCartController()
+            : this(new MusicStoreEntities())
+        {
+
+        }
+
         public ShoppingCartController(IMusicStoreEntities storeDb)
         {
             this.storeDB = storeDb;
