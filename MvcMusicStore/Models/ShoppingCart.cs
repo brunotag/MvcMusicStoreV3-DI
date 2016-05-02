@@ -21,7 +21,7 @@ namespace MvcMusicStore.Models
 
         public static ShoppingCart GetCart(HttpContextBase context)
         {
-            var cart = new ShoppingCart();
+            var cart = new ShoppingCart(new MusicStoreEntities());
             cart.ShoppingCartId = cart.GetCartId(context);
             return cart;
         }
