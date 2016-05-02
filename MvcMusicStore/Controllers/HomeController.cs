@@ -10,7 +10,7 @@ namespace MvcMusicStore.Controllers
         //
         // GET: /Home/
 
-        MusicStoreEntities storeDB = new MusicStoreEntities();
+        IMusicStoreEntities storeDB = new MusicStoreEntities();
 
         public ActionResult Index()
         {

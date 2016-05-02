@@ -12,7 +12,7 @@ namespace MvcMusicStore.Controllers
     [Authorize(Roles = "Administrator")]
     public class StoreManagerController : Controller
     {
-        private MusicStoreEntities db = new MusicStoreEntities();
+        private IMusicStoreEntities db = new MusicStoreEntities();
 
         //
         // GET: /StoreManager/

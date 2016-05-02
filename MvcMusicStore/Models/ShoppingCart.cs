@@ -8,7 +8,7 @@ namespace MvcMusicStore.Models
 {
     public partial class ShoppingCart
     {
-        MusicStoreEntities storeDB = new MusicStoreEntities();
+        IMusicStoreEntities storeDB = new MusicStoreEntities();
 
         string ShoppingCartId { get; set; }
 
