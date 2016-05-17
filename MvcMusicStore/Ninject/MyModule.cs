@@ -1,4 +1,6 @@
-﻿using Ninject.Modules;
+﻿using MvcMusicStore.Models;
+using Ninject.Modules;
+using Ninject.Web.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace MvcMusicStore.Ninject
     {
         public override void Load()
         {
-            
+            Bind<IMusicStoreEntities>().To<MusicStoreEntities>().InRequestScope();
         }
     }
 }
