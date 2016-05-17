@@ -39,6 +39,10 @@
       <HintPath>..\packages\EntityFramework.4.2.0.0\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FakeDbSet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FakeDbSet.1.0\lib\net40\FakeDbSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +67,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ShoppingCart\ShoppingCartFakeFactory.cs" />
     <Compile Include="ShoppingCart\ShoppingCartTest.AddToCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

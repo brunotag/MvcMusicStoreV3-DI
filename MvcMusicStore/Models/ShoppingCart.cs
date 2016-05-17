@@ -15,7 +15,7 @@ namespace MvcMusicStore.Models
             this.storeDB = storeDb;
         }
 
-        string ShoppingCartId { get; set; }
+        internal string ShoppingCartId { get; set; }
 
         public const string CartSessionKey = "CartId";
 
