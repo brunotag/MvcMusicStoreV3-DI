@@ -26,12 +26,6 @@ namespace MvcMusicStore.Models
             return cart;
         }
 
-        // Helper method to simplify shopping cart calls
-        public static ShoppingCart GetCart(Controller controller)
-        {
-            return GetCart(controller.HttpContext);
-        }
-
         public void AddToCart(Album album)
         {
             // Get the matching cart and album instances
