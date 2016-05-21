@@ -14,12 +14,6 @@ namespace MvcMusicStore.Controllers
     {
         IMusicStoreEntities db;
 
-        public StoreManagerController()
-            : this(new MusicStoreEntities())
-        {
-
-        }
-
         public StoreManagerController(IMusicStoreEntities storeDb)
         {
             this.db = storeDb;
