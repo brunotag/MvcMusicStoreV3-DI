@@ -13,6 +13,8 @@ namespace MvcMusicStore.Ninject
         public override void Load()
         {
             Bind<IMusicStoreEntities>().To<MusicStoreEntities>().InRequestScope();
+            Bind<HttpContext>().ToMethod((ctx) => HttpContext.Current);
+
         }
     }
 }
