@@ -161,8 +161,7 @@ cart => cart.CartId == ShoppingCartId
             return order.OrderId;
         }
 
-        // We're using HttpContextBase to allow access to cookies.
-        public string GetCartId(HttpContextBase context)
+        public string GetCartId(HttpContext context)
         {
             if (context.Session[CartSessionKey] == null)
             {
