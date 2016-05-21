@@ -7,11 +7,13 @@ namespace MvcMusicStore.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        IMusicStoreEntities storeDB;
+        IMusicStoreEntities _storeDB;
+        IShoppingCartFactory _shoppingCartFactory;
 
-        public ShoppingCartController(IMusicStoreEntities storeDb)
+        public ShoppingCartController(IMusicStoreEntities storeDb, IShoppingCartFactory shoppingCartFactory)
         {
-            this.storeDB = storeDb;
+            _storeDB = storeDb;
+            _shoppingCartFactory = shoppingCartFactory;
         }
 
         //
@@ -19,7 +21,7 @@ namespace MvcMusicStore.Controllers
 
         public ActionResult Index()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = _shoppingCartFactory.GetCart();
 
             // Set up our ViewModel
             var viewModel = new ShoppingCartViewModel
@@ -39,11 +41,11 @@ namespace MvcMusicStore.Controllers
         {
 
             // Retrieve the album from the database
-            var addedAlbum = storeDB.Albums
+            var addedAlbum = _storeDB.Albums
                 .Single(album => album.AlbumId == id);
 
             // Add it to the shopping cart
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = _shoppingCartFactory.GetCart();
 
             cart.AddToCart(addedAlbum);
 
@@ -58,10 +60,10 @@ namespace MvcMusicStore.Controllers
         public ActionResult RemoveFromCart(int id)
         {
             // Remove the item from the cart
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = _shoppingCartFactory.GetCart();
 
             // Get the name of the album to display confirmation
-            string albumName = storeDB.Carts
+            string albumName = _storeDB.Carts
                 .Single(item => item.RecordId == id).Album.Title;
 
             // Remove from cart
@@ -87,7 +89,7 @@ namespace MvcMusicStore.Controllers
         [ChildActionOnly]
         public ActionResult CartSummary()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = _shoppingCartFactory.GetCart();
 
             ViewData["CartCount"] = cart.GetCount();
 

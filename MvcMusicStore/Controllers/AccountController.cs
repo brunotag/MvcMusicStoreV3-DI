@@ -7,16 +7,23 @@ using System.Web.Routing;
 using System.Web.Security;
 using Mvc3ToolsUpdateWeb_Default.Models;
 using MvcMusicStore.Models;
+using MvcMusicStore;
 
 namespace Mvc3ToolsUpdateWeb_Default.Controllers
 {
     public class AccountController : Controller
     {
+        IShoppingCartFactory _shoppingCartFactory;
+
+        public AccountController(IShoppingCartFactory shoppingCartFactory)
+        {
+            _shoppingCartFactory = shoppingCartFactory;
+        }
 
         private void MigrateShoppingCart(string UserName)
         {
             // Associate shopping cart items with logged-in user
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = _shoppingCartFactory.GetCart();
 
             cart.MigrateCart(UserName);
             Session[ShoppingCart.CartSessionKey] = UserName;
@@ -40,8 +47,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
-                    MigrateShoppingCart(model.UserName); 
-                    
+                    MigrateShoppingCart(model.UserName);
+
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
@@ -95,8 +102,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    MigrateShoppingCart(model.UserName); 
-                    
+                    MigrateShoppingCart(model.UserName);
+
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
