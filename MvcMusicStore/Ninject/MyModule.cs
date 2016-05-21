@@ -14,7 +14,7 @@ namespace MvcMusicStore.Ninject
         {
             Bind<IMusicStoreEntities>().To<MusicStoreEntities>().InRequestScope();
             Bind<HttpContext>().ToMethod((ctx) => HttpContext.Current);
-
+            Bind<IShoppingCartFactory>().To<ShoppingCartFactory>().InRequestScope();
         }
     }
 }
